@@ -93,7 +93,7 @@ alias yta="youtube-dl --add-metadata -xic"
 # use Neovim
 alias vim="nvim"
 alias vi="nvim"
-# Alias for yazi
+
 # A funktion for the Yazi file manager so it cd to where you are.
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -111,6 +111,7 @@ colorscript random
 ## If i want to use fastfetch
 #fastfetch -c neofetch.jsonc
 # Starchip-A cross-shell prompt
+# To install Starchip run: curl -sS https://starship.rs/install.sh | sh
 eval "$(starship init bash)"
 
 
