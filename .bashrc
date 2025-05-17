@@ -106,7 +106,7 @@ function y() {
 
 ### RANDOM COLOR SCRIPT ###
 # Install with yay -S shell-color-scripts-git
-colorscript random
+#colorscript random
 
 ## If i want to use fastfetch
 #fastfetch -c neofetch.jsonc

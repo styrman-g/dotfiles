@@ -31,6 +31,7 @@
 #window,
 #pulseaudio,
 #custom-updates,
+#disk,
 #network {
   padding: 4px 8px;
   background-color: #303643;
@@ -70,7 +71,9 @@
 #cpu {
   color: #61afef;
 }
-
+#disk {
+    color: #c678dd;
+}
 #temperature {
   color: #98c379;
 }

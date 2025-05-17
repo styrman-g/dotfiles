@@ -14,6 +14,7 @@
       "temperature",
       "memory",
       "cpu",
+      "disk",
       "pulseaudio",
       "clock",
       "custom/powermenu",
@@ -70,13 +71,18 @@
       "format-icons": ["", "", ""]
     },
     "memory": {
-      "format": " {}%",
+      "format": " {}%",
       "tooltip": "false"
     },
     "cpu": {
       "format": " {usage}%",
       "tooltip": "false"
     },
+    "disk": {
+    "interval": 30,
+    "format": " {percentage_used}%",
+    "path": "/"
+},
     "custom/powermenu": {
       "format": "",
       "tooltip": false,
