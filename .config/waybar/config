@@ -59,7 +59,7 @@
       }
     },
     "network": {
-      "interface": "enp2s0",
+      "interface": "wlan0",
       "tooltip-format-ethernet": "{ifname} ",
       "interval": 2,
       "format": " {bandwidthDownBits}  {bandwidthUpBits}",

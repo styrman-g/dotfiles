@@ -18,7 +18,7 @@ light = "catppuccin-mocha"
 
 # : Manager {{{
 
-[mgr]
+[manager]
 cwd = { fg = "cyan" }
 
 # Hovered
