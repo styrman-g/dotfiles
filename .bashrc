@@ -82,7 +82,7 @@ alias update='sudo pacman -Syu'
 alias install='sudo pacman -S'
 
 # Adding color
-alias ls='ls -l --color=always --group-directories-first'
+alias ls="lsd -lah --group-dirs first"
 alias grep="grep --color=auto"
 
 # Internet
@@ -93,6 +93,8 @@ alias yta="youtube-dl --add-metadata -xic"
 # use Neovim
 alias vim="nvim"
 alias vi="nvim"
+# cat as bat
+alias cat="bat"
 
 # A funktion for the Yazi file manager so it cd to where you are.
 function y() {

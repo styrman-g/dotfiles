@@ -1,25 +1,41 @@
-# Styrmans Fish config.
-# https://github.com/styrman-g/mydotfiles
+#  ____ _____
+# |  _ \_   _|  Derek Taylor (DistroTube)
+# | | | || |    http://www.youtube.com/c/DistroTube
+# | |_| || |    http://www.gitlab.com/dwt1/
+# |____/ |_|
+#
+# My fish config. Not much to see here; just some pretty standard stuff.
 
 ### ADDING TO THE PATH
-# First line removes the path; second line sets it. Witout the first line,
-#your path gets massive and fish becomes very slow.
+# First line removes the path; second line sets it.  Without the first line,
+# your path gets massive and fish becomes very slow.
 set -e fish_user_paths
-set -U fish_user_paths $HOME/.bin $/.local/bin $fish_user_paths
+set -U fish_user_paths $HOME/.bin  $HOME/.local/bin $HOME/.config/emacs/bin $HOME/Applications /var/lib/flatpak/exports/bin/ $fish_user_paths
 
 ### EXPORT ###
-set fish_greeting						# Supresses fish intro message
-set TERM "xterm-256color"				# Sets the terminal type
-set EDITOR "nvim"						# Sets editor
+set fish_greeting                                 # Supresses fish's intro message
+set TERM "xterm-256color"                         # Sets the terminal type
+set EDITOR "emacsclient -t -a ''"                 # $EDITOR use Emacs in terminal
+set VISUAL "emacsclient -c -a emacs"              # $VISUAL use Emacs in GUI mode
 
+### SET FZF DEFAULTS
+set FZF_DEFAULT_OPTS "--layout=reverse --exact --border=bold --border=rounded --margin=3% --color=dark"
 
 ### SET MANPAGER
+### Uncomment only one of these!
 
-## "nvim" as manpager
+### "nvim" as manpager
 set -x MANPAGER "nvim +Man!"
 
-## "less" as manpager
-#set -x MANPAGER "less"
+### "less" as manpager
+# set -x MANPAGER "less"
+
+### SET EITHER DEFAULT EMACS MODE OR VI MODE ###
+function fish_user_key_bindings
+  # fish_default_key_bindings
+  fish_vi_key_bindings
+end
+### END OF VI MODE ###
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal brcyan
@@ -59,6 +75,73 @@ else
   bind '$' __history_previous_command_arguments
 end
 
+# Function for creating a backup file
+# ex: backup file.txt
+# result: copies file as file.txt.bak
+function backup --argument filename
+    cp $filename $filename.bak
+end
+
+# Function for copying files and directories, even recursively.
+# ex: copy DIRNAME LOCATIONS
+# result: copies the directory and all of its contents.
+function copy
+    set count (count $argv | tr -d \n)
+    if test "$count" = 2; and test -d "$argv[1]"
+	set from (echo $argv[1] | trim-right /)
+	set to (echo $argv[2])
+        command cp -r $from $to
+    else
+        command cp $argv
+    end
+end
+
+# Function for printing a column (splits input on whitespace)
+# ex: echo 1 2 3 | coln 3
+# output: 3
+function coln
+    while read -l input
+        echo $input | awk '{print $'$argv[1]'}'
+    end
+end
+
+# Function for printing a row
+# ex: seq 3 | rown 3
+# output: 3
+function rown --argument index
+    sed -n "$index p"
+end
+
+# Function for ignoring the first 'n' lines
+# ex: seq 10 | skip 5
+# results: prints everything but the first 5 lines
+function skip --argument n
+    tail +(math 1 + $n)
+end
+
+# Function for taking the first 'n' lines
+# ex: seq 10 | take 5
+# results: prints only the first 5 lines
+function take --argument number
+    head -$number
+end
+
+# Function for org-agenda
+function org-search -d "send a search string to org-mode"
+    set -l output (/usr/bin/emacsclient -a "" -e "(message \"%s\" (mapconcat #'substring-no-properties \
+        (mapcar #'org-link-display-format \
+        (org-ql-query \
+        :select #'org-get-heading \
+        :from  (org-agenda-files) \
+        :where (org-ql--query-string-to-sexp \"$argv\"))) \
+        \"
+    \"))")
+    printf $output
+end
+
+### END OF FUNCTIONS ###
+
+
 ### ALIASES ###
 # navigation
 alias ..='cd ..'
@@ -67,8 +150,39 @@ alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
-# vim
+# vim and emacs
 alias vim='nvim'
+alias emacs="emacsclient -c -a 'emacs'"
+alias em='/usr/bin/emacs -nw'
+alias rem="killall emacs || echo 'Emacs server not running'; /usr/bin/emacs --daemon" # Kill Emacs and restart daemon..
+
+# pacman and yay
+alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
+alias pacsyyu='sudo pacman -Syyu'                # Refresh pkglist & update standard pkgs
+alias parsua='paru -Sua --noconfirm'             # update only AUR pkgs (paru)
+alias parsyu='paru -Syu --noconfirm'             # update standard pkgs and AUR pkgs (paru)
+alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
+alias orphan='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages (DANGEROUS!)
+
+# get fastest mirrors
+alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
+alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
+alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
+
+# adding flags
+alias df='df -h'               # human-readable sizes
+alias free='free -m'           # show sizes in MB
+alias grep='grep --color=auto' # colorize output (good for log files)
+
+# ps
+alias psa="ps auxf"
+alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias psmem='ps auxf | sort -nr -k 4'
+alias pscpu='ps auxf | sort -nr -k 3'
+
+# Merge Xresources
+alias merge='xrdb -merge ~/.Xresources'
 
 # git
 alias addup='git add -u'
@@ -80,21 +194,53 @@ alias commit='git commit -m'
 alias fetch='git fetch'
 alias pull='git pull origin'
 alias push='git push origin'
+alias tag='git tag'
+alias newtag='git tag -a'
 
-# Merge Xresources
-alias merge=`xrdb -merge ~/.Xresources´
+# get error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
 
+# gpg encryption
+# verify signature for isos
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+# receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
-### SETTING THE STARCHIP PROMPT ###
-starchip init fish | source
+# change your default USER shell
+alias tobash="chsh $USER -s /bin/bash && echo 'Log out and log back in for change to take effect.'"
+alias tozsh="chsh $USER -s /bin/zsh && echo 'Log out and log back in for change to take effect.'"
+alias tofish="chsh $USER -s /bin/fish && echo 'Log out and log back in for change to take effect.'"
 
+# bigger font in tty and regular font in tty
+alias bigfont="setfont ter-132b"
+alias regfont="setfont default8x16"
+
+# bare git repo alias for dotfiles
+alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+
+# termbin
+alias tb="nc termbin.com 9999"
+
+# the terminal rickroll
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+
+# Mocp must be launched with bash instead of Fish!
+alias mocp="bash -c mocp"
+
+### RANDOM COLOR SCRIPT ###
+# Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
+# Or install it from the Arch User Repository: shell-color-scripts
+# The 'if' statement prevents colorscript from showing in 'fzf' previews.
+if status is-interactive
+    colorscript random
+end
+
+### SETTING THE STARSHIP PROMPT ###
+starship init fish | source
 
 ### FZF ###
-CTRL -t = fzf select
-CTRL -r = fzf history
-ALT -c = fzf cd
+# Enables the following keybindings:
+# CTRL-t = fzf select
+# CTRL-r = fzf history
+# ALT-c  = fzf cd
 fzf --fish | source
-
-
-
-
