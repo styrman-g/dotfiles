@@ -96,6 +96,21 @@ alias vi="nvim"
 # cat as bat
 alias cat="bat"
 
+# git
+alias addall="git add ."
+alias clone="git clone"
+alias commit="git commit -m"
+alias pull="git pull"
+alias push="git push"
+
+# navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+
 # A funktion for the Yazi file manager so it cd to where you are.
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
