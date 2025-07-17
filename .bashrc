@@ -109,6 +109,8 @@ alias ...='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
+alias oo="cd /home/styrman/Dokument/second-brain"
+
 
 
 # A funktion for the Yazi file manager so it cd to where you are.
