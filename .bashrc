@@ -96,6 +96,8 @@ alias vi="nvim"
 # cat as bat
 alias cat="bat"
 
+alias hss="hugo server --noHTTPCache"
+
 # git
 alias addall="git add ."
 alias clone="git clone"
