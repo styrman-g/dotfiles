@@ -14,8 +14,11 @@
 # https://github.com/styrman-g
 
 
-# Enable colors and change prompt:
+# Enable colors:
 autoload -U colors && colors	# Load colors
+
+# Automatically cd into typed directory
+setopt autocd
 
 # History in cache directory:
 HISTSIZE=10000000
@@ -63,4 +66,6 @@ alias grep="grep --color=auto"
 # Starchip-A cross-shell prompt
 # To install Starchip run: curl -sS https://starship.rs/install.sh | sh
 eval "$(starship init zsh)"
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
