@@ -13,6 +13,10 @@
 # My zsh config file.
 # https://github.com/styrman-g
 
+### EXPORTS
+export EDITOR="nvim"
+export TERM="xterm-256color"                      # getting proper colors
+export BROWSER="brave"
 
 # Enable colors and change prompt:
 autoload -U colors && colors	# Load colors
@@ -36,10 +40,6 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-### EXPORTS
-export EDITOR=nvim
-export TERM="xterm-256color"                      # getting proper colors
-
 # A funktion for the Yazi file manager so it cd to where you are.
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -49,6 +49,24 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+### PATH
+if [ -d "$HOME/.bin" ] ;
+  then PATH="$HOME/.bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ] ;
+  then PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/Applications" ] ;
+  then PATH="$HOME/Applications:$PATH"
+fi
+
+if [ -d "/var/lib/flatpak/exports/bin/" ] ;
+  then PATH="/var/lib/flatpak/exports/bin/:$PATH"
+fi
+
 
 # MY ALIAS
 # use Neovim
