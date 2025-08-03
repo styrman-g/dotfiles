@@ -104,6 +104,10 @@ alias vi="nvim"
 alias ls="lsd -lah --group-dirs first"
 alias grep="grep --color=auto"
 
+# pacman package manager
+alias update='sudo pacman -Syu'
+alias install='sudo pacman -S'
+
 
 # Starchip-A cross-shell prompt
 # To install Starchip run: curl -sS https://starship.rs/install.sh | sh
