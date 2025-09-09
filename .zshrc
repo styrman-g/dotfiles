@@ -96,11 +96,18 @@ if [ -d "/var/lib/flatpak/exports/bin/" ] ;
   then PATH="/var/lib/flatpak/exports/bin/:$PATH"
 fi
 
+if [ -d "$HOME/.config/emacs/bin" ] ;
+    then PATH="$HOME/.config/emacs/bin/:$PATH"
+fi
+
 
 # MY ALIAS
 # use Neovim
 alias vim="nvim"
 alias vi="nvim"
+
+# Emacs alias
+alias emacs= "emacsclient -c -a 'emacs'"
 
 # Adding color
 alias ls="lsd -lah --group-dirs first"
