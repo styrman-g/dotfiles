@@ -55,4 +55,5 @@ dunst &
 nm-applet &
 volumeicon &
 slstatus &
+/usr/bin/emacs --daemon &
 exec dwm
