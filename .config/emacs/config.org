@@ -1,4 +1,4 @@
-#+TITLE: Styrmans Emacs config file. 
+#+TITLE: Styrmans Emacs config file.
 #+AUTHOR: Gustav Hogbring
 #+DESCRIPTION: Styrmans personal Emacs config.
 #+STARTUP: showeverything
@@ -7,6 +7,7 @@
 * TABLE OF CONTENTS :toc:
 
 * IMPORTANT PROGRAMS TO LOAD FIRST
+** Setup the package manager
 #+begin_src emacs-lisp
 ;; Setup the package manager
 (require 'package)
@@ -20,23 +21,37 @@
   (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
+#+end_src
 
-;; Setup icons
+** Setup icons
+#+begin_src emacs-lisp
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
 
 (use-package all-the-icons-dired
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
-
-;; TRASH
+#+end_src
+** Setup TRASH
+#+begin_src emacs-lisp
 (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+#+end_src
 
+** SETUP MY THEME
+#+begin_src emacs-lisp
 ;; Setup Catppuccin as theme
 (use-package catppuccin-theme)
 (load-theme 'catppuccin :no-confirm)
+#+end_src
 
-;; Setup a startscreen
+** SETUP EVIL MODE
+#+begin_src emacs-lisp
+(require 'evil)
+(evil-mode 1) 
+#+end_src
+
+** SETUP A STARTSCREEN
+#+begin_src emacs-lisp
 (use-package dashboard
   :ensure t 
   :init
@@ -56,29 +71,11 @@
 				      (bookmarks . "book")))
   :config
   (dashboard-setup-startup-hook))
+#+end_src
 
-;; MINIBUBBER ESCAPE
-(global-set-key [escape] 'keyboard-escape-quit)
+** SETUP CONSULT/MODELINE
 
-
-;; Download Evil
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
-
-;; Enable Evil
-(require 'evil)
-(evil-mode 1)
-
-(use-package vertico
-  :ensure t
-  :init (vertico-mode))
-
-(use-package orderless
-:ensure t
-:custom
-(completion-styles '(orderless basic))
-(completion-category-overrides '((file (styles basic partial-completion)))))
-
+#+begin_src emacs-lisp
 (use-package consult
   :ensure t
   :bind (
@@ -96,10 +93,21 @@
         doom-modeline-bar-width 5    ;; sets right bar width
         doom-modeline-persp-name t   ;; adds perspective name to modeline
         doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
+#+end_src
 
+* KEYBINDINGS
+
+#+begin_src emacs-lisp
 ;; Set my KEYBINDINGS
 (global-set-key (kbd "C-c e") #'elfeed)
 
+#+end_src
+
+* SETUP SOME SANE DEFAULTS
+
+#+begin_src emacs-lisp
+;; MINIBUBBER ESCAPE
+(global-set-key [escape] 'keyboard-escape-quit)
 
 ;; Set initial major mode to 'org-mode'
 (setq initial-major-mode 'org-mode
@@ -143,6 +151,11 @@ dired-listing-switches "-aghov --group-directories-first")
 (require 'org-id) ; for creating ids
 (require 'org-tempo) ; for template expansion
 
+#+end_src
+
+* ELFEED
+
+#+begin_src emacs-lisp
 (use-package elfeed
   :config
   (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
@@ -151,17 +164,5 @@ dired-listing-switches "-aghov --group-directories-first")
                         ("https://opensource.com/feed" opensource linux)
                         ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 #+end_src
+
