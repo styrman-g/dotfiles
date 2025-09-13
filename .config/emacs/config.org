@@ -253,6 +253,7 @@ Install python-pylint for flycheck to work with python files.
   :init (global-flycheck-mode))
 #+end_src
 
+<<<<<<< HEAD
 ** MAGIT
 
 #+begin_src emacs-lisp
@@ -260,6 +261,12 @@ Install python-pylint for flycheck to work with python files.
 
 
 #+end_src
+=======
+
+
+
+
+>>>>>>> 3c6f908f83780d390c4cffd2c987f76d0d18a58f
 
 
 
