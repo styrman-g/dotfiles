@@ -170,6 +170,29 @@
                              ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
 #+end_src
 
+** DIRED
+#+begin_src emacs-lisp
+
+(use-package dired-open
+  :config
+  (setq dired-open-extensions '(("gif" . "sxiv")
+                                ("jpg" . "sxiv")
+                                ("png" . "sxiv")
+                                ("mkv" . "mpv")
+                                ("mp4" . "mpv"))))
+
+(use-package peep-dired
+  :after dired
+  :hook (evil-normalize-keymaps . peep-dired-hook)
+  :config
+    (evil-define-key 'normal dired-mode-map (kbd "h") 'dired-up-directory)
+    (evil-define-key 'normal dired-mode-map (kbd "l") 'dired-open-file) ; use dired-find-file instead if not using dired-open package
+    (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file)
+    (evil-define-key 'normal peep-dired-mode-map (kbd "k") 'peep-dired-prev-file)
+)
+
+#+end_src
+
 ** ORG MODE
 *** Enabling Table of Contents
 
@@ -202,6 +225,18 @@
  '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
 #+end_src
 
+** FLYCHECK
+Install luacheck from your Linux distro’s repositories
+for flycheck to work correctly with lua files.  
+Install python-pylint for flycheck to work with python files.
+
+#+begin_src emacs-lisp
+(use-package flycheck
+  :ensure t
+  :defer t
+  :diminish
+  :init (global-flycheck-mode))
+#+end_src
 
 
 
