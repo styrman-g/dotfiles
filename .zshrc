@@ -107,7 +107,7 @@ alias vim="nvim"
 alias vi="nvim"
 
 # Emacs alias
-alias emacs= "emacsclient -c -a 'emacs'"
+#alias emacs= "emacsclient -c -a 'emacs'"
 
 # Adding color
 alias ls="lsd -lah --group-dirs first"
