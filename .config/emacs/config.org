@@ -119,6 +119,9 @@
   ;; Monday is the first day of the weak
   (setq calendar-week-start-day 1)
 
+  ;; enable witch-key
+  (which-key-mode)  ;; To enable witch-key globaly
+
 #+end_src
 
 * SETUP MY THEME
