@@ -5,7 +5,23 @@
 #+OPTIONS: toc:2
 
 
-
+* TABLE OF CONTENTS :toc:
+- [[#setup-package-manager][SETUP PACKAGE MANAGER]]
+- [[#some-basic-stuff][SOME BASIC STUFF]]
+- [[#setup-my-theme][SETUP MY THEME]]
+- [[#setup-some-programs][SETUP SOME PROGRAMS]]
+  - [[#setup-a-startscreen][SETUP A STARTSCREEN]]
+  - [[#evil-mode][EVIL MODE]]
+  - [[#setup-icons][SETUP ICONS]]
+  - [[#install-modeline][INSTALL MODELINE]]
+  - [[#vertico-and-orderless][VERTICO AND ORDERLESS]]
+  - [[#dired][DIRED]]
+  - [[#org-mode][ORG MODE]]
+  - [[#flycheck][FLYCHECK]]
+  - [[#magit][MAGIT]]
+- [[#shells-and-terminals][SHELLS AND TERMINALS]]
+  - [[#vterm][VTERM]]
+- [[#keybindings][KEYBINDINGS]]
 
 * SETUP PACKAGE MANAGER
 
