@@ -1,150 +1,75 @@
 #+TITLE: Styrmans GNU Emacs Config
-#+AUTHOR: Gustav Hogbring
+#+AUTHOR: Gustav Hogbring 
 #+DESCRIPTION: Styrmans personal Emacs config.
 #+STARTUP: showeverything
 #+OPTIONS: toc:2
 
-* TABLE OF CONTENTS :toc:
-- [[#setup-package-manager][SETUP PACKAGE MANAGER]]
-- [[#setup-icons][SETUP ICONS]]
-- [[#setup-my-theme][SETUP MY THEME]]
-- [[#setup-some-programs][SETUP SOME PROGRAMS]]
-  - [[#setup-a-startscreen][SETUP A STARTSCREEN]]
-  - [[#evil-mode][EVIL MODE]]
-  - [[#vertico-and-orderless][VERTICO AND ORDERLESS]]
-  - [[#install-modeline][INSTALL MODELINE]]
-  - [[#some-basic-stuff][SOME BASIC STUFF]]
-  - [[#install-elfeed][INSTALL ELFEED]]
-  - [[#dired][DIRED]]
-  - [[#org-mode][ORG MODE]]
-  - [[#flycheck][FLYCHECK]]
-  - [[#magit][MAGIT]]
-- [[#shells-and-terminals][SHELLS AND TERMINALS]]
-  - [[#vterm][VTERM]]
+
+
 
 * SETUP PACKAGE MANAGER
-#+begin_src emacs-lisp
-
-    ;; Setup the package manager
-    (require 'package)
-    (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-                           ("elpa" . "https://elpa.gnu.org/packages/")))
-    (package-initialize)
-    (unless package-archive-contents
-    (package-refresh-contents))
-    (unless (package-installed-p 'use-package)
-      (package-install 'use-package))
-    (require 'use-package)
-    (setq use-package-always-ensure t)
-
-#+end_src
-
-* SETUP ICONS
- #+begin_src emacs-lisp
-
-   ;; Setup icons
-   (use-package all-the-icons
-     :ensure t
-     :if (display-graphic-p))
-
-   (use-package all-the-icons-dired
-     :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
-
-   ;; TRASH
-   (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
- 
-#+end_src
-
-* SETUP MY THEME
-
- #+begin_src emacs-lisp
-   ;; Setup Catppuccin as theme
-   (use-package catppuccin-theme)
-   (load-theme 'catppuccin :no-confirm)
-   (setq catppuccin-flavor 'macchiato)
-   (catppuccin-reload)
-
-#+end_src
-* SETUP SOME PROGRAMS
-** SETUP A STARTSCREEN
-
- #+begin_src emacs-lisp
-   ;; Setup a startscreen
-   (use-package dashboard
-     :ensure t 
-     :init
-     (setq initial-buffer-choice 'dashboard-open)
-     (setq dashboard-set-heading-icons t)
-     (setq dashboard-set-file-icons t)
-     (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
-     (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-     (setq dashboard-center-content nil) ;; set to 't' for centered content
-     (setq dashboard-items '((recents . 5)
-                             (agenda . 5 )
-                             (bookmarks . 3)
-                             (projects . 3)
-                             (registers . 3)))
-     :custom 
-     (dashboard-modify-heading-icons '((recents . "file-text")
-   				      (bookmarks . "book")))
-     :config
-     (dashboard-setup-startup-hook))
-
-#+end_src
-
-** EVIL MODE
-
- #+begin_src emacs-lisp
-   ;; Download Evil
-   (unless (package-installed-p 'evil)
-     (package-install 'evil))
-
-   ;; Enable Evil
-   (require 'evil)
-   (evil-mode 1)
-
-#+end_src
-
-** VERTICO AND ORDERLESS
-
- #+begin_src emacs-lisp
-     (use-package vertico
-       :ensure t
-       :init (vertico-mode))
-
-     (use-package orderless
-     :ensure t
-     :custom
-     (completion-styles '(orderless basic))
-     (completion-category-overrides '((file (styles basic partial-completion)))))
-
-     (use-package consult
-       :ensure t
-       :bind (
-              ("M-s b" . consult-buffer)
-              ("M-s g" . consult-grep)
-              ("M-s j" . consult-outline)
-              ))
-
-#+end_src
-
-** INSTALL MODELINE
 
 #+begin_src emacs-lisp
-     ;; MODELINE
-     (use-package doom-modeline
-       :ensure t
-       :init (doom-modeline-mode 1)
-       :config
-       (setq doom-modeline-height 35      ;; sets modeline height
-             doom-modeline-bar-width 5    ;; sets right bar width
-             doom-modeline-persp-name t   ;; adds perspective name to modeline
-             doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
+(defvar elpaca-installer-version 0.11)
+(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                              :ref nil :depth 1 :inherit ignore
+                              :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+                              :build (:not elpaca--activate-package)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+       (build (expand-file-name "elpaca/" elpaca-builds-directory))
+       (order (cdr elpaca-order))
+       (default-directory repo))
+  (add-to-list 'load-path (if (file-exists-p build) build repo))
+  (unless (file-exists-p repo)
+    (make-directory repo t)
+    (when (<= emacs-major-version 28) (require 'subr-x))
+    (condition-case-unless-debug err
+        (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                  ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                  ,@(when-let* ((depth (plist-get order :depth)))
+                                                      (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                  ,(plist-get order :repo) ,repo))))
+                  ((zerop (call-process "git" nil buffer t "checkout"
+                                        (or (plist-get order :ref) "--"))))
+                  (emacs (concat invocation-directory invocation-name))
+                  ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                        "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                  ((require 'elpaca))
+                  ((elpaca-generate-autoloads "elpaca" repo)))
+            (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+          (error "%s" (with-current-buffer buffer (buffer-string))))
+      ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+  (unless (require 'elpaca-autoloads nil t)
+    (require 'elpaca)
+    (elpaca-generate-autoloads "elpaca" repo)
+    (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
+(add-hook 'after-init-hook #'elpaca-process-queues)
+(elpaca `(,@elpaca-order))
+;; Install use-package support
+(elpaca elpaca-use-package
+  ;; Enable use-package :ensure support for Elpaca.
+  (elpaca-use-package-mode))
+
+;;When installing a package used in the init file itself,
+;;e.g. a package which adds a use-package key word,
+;;use the :wait recipe keyword to block until that package is installed/configured.
+;;For example:
+;;(use-package general :ensure (:wait t) :demand t)
+
+;; Expands to: (elpaca evil (use-package evil :demand t))
+;;(use-package evil :ensure t :demand t)
+
+;;Turns off elpaca-use-package-mode current declaration
+;;Note this will cause evaluate the declaration immediately. It is not deferred.
+;;Useful for configuring built-in emacs features.
+;;(use-package emacs :ensure nil :config (setq ring-bell-function #'ignore))
 
 #+end_src
 
-** SOME BASIC STUFF
+* SOME BASIC STUFF
 
 #+begin_src emacs-lisp
   ;; Set initial major mode to 'org-mode'
@@ -180,53 +105,147 @@
 
 #+end_src
 
-*** KEYBINDINGS
-#+begin_src emacs-lisp
-  (with-eval-after-load 'org
-  (define-key org-mode-map (kbd "C-c C-t") 'org-cycle))
-  ;; Set a keybinding for org-agenda.
-  (global-set-key (kbd "C-c a") 'org-agenda)
+* SETUP MY THEME
 
-  ;; Set a keybinding for ESHELL
-  (global-set-key (kbd "C-c e") 'eshell)
+ #+begin_src emacs-lisp
+   (use-package doom-themes
+     :ensure t
+     :custom
+     ;; Global settings (defaults)
+     (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+     (doom-themes-enable-italic t) ; if nil, italics is universally disabled
+     ;; for treemacs users
+     (doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+     :config
+     (load-theme 'doom-one t)
 
-  ;; Minibuffer escape
-  (global-set-key [escape] 'keyboard-escape-quit)
+     ;; Enable flashing mode-line on errors
+     (doom-themes-visual-bell-config)
+     ;; Enable custom neotree theme (nerd-icons must be installed!)
+     (doom-themes-neotree-config)
+     ;; or for treemacs users
+     (doom-themes-treemacs-config)
+     ;; Corrects (and improves) org-mode's native fontification.
+     (doom-themes-org-config))
+
+   
+#+end_src
+
+
+* SETUP SOME PROGRAMS
+** SETUP A STARTSCREEN
+
+ #+begin_src emacs-lisp
+   ;; Setup a startscreen
+   (use-package dashboard
+     :ensure t 
+     :init
+     (setq initial-buffer-choice 'dashboard-open)
+     (setq dashboard-set-heading-icons t)
+     (setq dashboard-set-file-icons t)
+     (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+     (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+     (setq dashboard-center-content nil) ;; set to 't' for centered content
+     (setq dashboard-items '((recents . 5)
+                             (agenda . 5 )
+                             (bookmarks . 3)
+                             (projects . 3)
+                             (registers . 3)))
+     :custom 
+     (dashboard-modify-heading-icons '((recents . "file-text")
+   				      (bookmarks . "book")))
+     :config
+     (dashboard-setup-startup-hook))
 
 #+end_src
 
-** INSTALL ELFEED
+** EVIL MODE
+
 
 #+begin_src emacs-lisp
-     (use-package elfeed
+(use-package evil
+:ensure ( :mait t)
+:demand t
+:config
+(evil-mode 1))
+
+#+end_src
+
+** SETUP ICONS
+ #+begin_src emacs-lisp
+
+   ;; Setup icons
+   (use-package all-the-icons
+     :ensure t
+     :if (display-graphic-p))
+
+   ;; TRASH
+   (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
+ 
+#+end_src
+
+
+** INSTALL MODELINE
+
+#+begin_src emacs-lisp
+     ;; MODELINE
+     (use-package doom-modeline
+       :ensure t
+       :init (doom-modeline-mode 1)
        :config
-       (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
-             elfeed-feeds (quote
-                            (("https://www.reddit.com/r/linux.rss" reddit linux)
-                             ("https://opensource.com/feed" opensource linux)
-                             ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
+       (setq doom-modeline-height 35      ;; sets modeline height
+             doom-modeline-bar-width 5    ;; sets right bar width
+             doom-modeline-persp-name t   ;; adds perspective name to modeline
+             doom-modeline-persp-icon t)) ;; adds folder icon next to persp name
+
+#+end_src
+
+** VERTICO AND ORDERLESS
+
+ #+begin_src emacs-lisp
+     (use-package vertico
+       :ensure t
+       :init (vertico-mode))
+
+     (use-package orderless
+     :ensure t
+     :custom
+     (completion-styles '(orderless basic))
+     (completion-category-overrides '((file (styles basic partial-completion)))))
+
+     (use-package consult
+       :ensure t
+       :bind (
+              ("M-s b" . consult-buffer)
+              ("M-s g" . consult-grep)
+              ("M-s j" . consult-outline)
+              ))
+
 #+end_src
 
 ** DIRED
 #+begin_src emacs-lisp
 
 (use-package dired-open
-  :config
-  (setq dired-open-extensions '(("gif" . "sxiv")
-                                ("jpg" . "sxiv")
-                                ("png" . "sxiv")
-                                ("mkv" . "mpv")
-                                ("mp4" . "mpv"))))
+      :ensure ( :mait t)
+      :demand t
 
-(use-package peep-dired
-  :after dired
-  :hook (evil-normalize-keymaps . peep-dired-hook)
-  :config
-    (evil-define-key 'normal dired-mode-map (kbd "h") 'dired-up-directory)
-    (evil-define-key 'normal dired-mode-map (kbd "l") 'dired-open-file) ; use dired-find-file instead if not using dired-open package
-    (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file)
-    (evil-define-key 'normal peep-dired-mode-map (kbd "k") 'peep-dired-prev-file)
-)
+      :config
+      (setq dired-open-extensions '(("gif" . "sxiv")
+                                    ("jpg" . "sxiv")
+                                    ("png" . "sxiv")
+                                    ("mkv" . "mpv")
+                                    ("mp4" . "mpv"))))
+
+    (use-package peep-dired
+      :after dired
+      :hook (evil-normalize-keymaps . peep-dired-hook)
+      :config
+        (evil-define-key 'normal dired-mode-map (kbd "h") 'dired-up-directory)
+        (evil-define-key 'normal dired-mode-map (kbd "l") 'dired-open-file) ; use dired-find-file instead if not using dired-open package
+        (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file)
+        (evil-define-key 'normal peep-dired-mode-map (kbd "k") 'peep-dired-prev-file)
+    )
 
 #+end_src
 
@@ -234,17 +253,22 @@
 *** Enabling Table of Contents
 
 #+begin_src emacs-lisp
-(use-package toc-org
-    :commands toc-org-enable
-    :init (add-hook 'org-mode-hook 'toc-org-enable))
+  (use-package toc-org
+      :ensure ( :mait t)
+      :demand t
+      :commands toc-org-enable
+      :init (add-hook 'org-mode-hook 'toc-org-enable))
 #+end_src
 
 *** Enabling Org Bullets
 #+begin_src emacs-lisp
 
-(add-hook 'org-mode-hook 'org-indent-mode)
-(use-package org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  (use-package org-bullets
+      :ensure ( :mait t)
+      :demand t)
+
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 #+end_src
 
@@ -278,7 +302,12 @@ Install python-pylint for flycheck to work with python files.
 ** MAGIT
 
 #+begin_src emacs-lisp
-(use-package magit)
+  (use-package transient :ensure t)
+  (use-package magit
+      :ensure t
+      :defer t)
+
+
 
 
 #+end_src
@@ -289,6 +318,8 @@ Install python-pylint for flycheck to work with python files.
 
 #+begin_src emacs-lisp
   (use-package vterm
+  :ensure ( :mait t)
+  :demand t
   :bind ("C-x v" . vterm)
   :config
   (setq shell-file-name "/bin/sh"
@@ -297,3 +328,17 @@ Install python-pylint for flycheck to work with python files.
 
 
 
+* KEYBINDINGS
+#+begin_src emacs-lisp
+  (with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c C-t") 'org-cycle))
+  ;; Set a keybinding for org-agenda.
+  (global-set-key (kbd "C-c a") 'org-agenda)
+
+  ;; Set a keybinding for ESHELL
+  (global-set-key (kbd "C-c e") 'eshell)
+
+  ;; Minibuffer escape
+  (global-set-key [escape] 'keyboard-escape-quit)
+
+#+end_src
