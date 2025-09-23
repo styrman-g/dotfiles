@@ -1,5 +1,5 @@
-#+TITLE: Styrmans GNU Emacs Config
 #+AUTHOR: Gustav Hogbring 
+#+TITLE: Styrmans GNU Emacs Config
 #+DESCRIPTION: Styrmans personal Emacs config.
 #+STARTUP: showeverything
 #+OPTIONS: toc:2
@@ -9,6 +9,7 @@
 - [[#setup-package-manager][SETUP PACKAGE MANAGER]]
 - [[#some-basic-stuff][SOME BASIC STUFF]]
 - [[#setup-my-theme][SETUP MY THEME]]
+- [[#setup-my-font][SETUP MY FONT]]
 - [[#setup-some-programs][SETUP SOME PROGRAMS]]
   - [[#setup-a-startscreen][SETUP A STARTSCREEN]]
   - [[#evil-mode][EVIL MODE]]
@@ -150,7 +151,18 @@
    
 #+end_src
 
+* SETUP MY FONT
 
+#+begin_src emacs-lisp
+
+  ;; Set default font
+  (set-face-attribute 'default nil
+  		    :family "JetBrains Mono"
+  		    :height 110
+  		    :weight 'normal
+  		    :width 'normal)
+
+#+end_src
 * SETUP SOME PROGRAMS
 ** SETUP A STARTSCREEN
 
@@ -200,7 +212,12 @@
 
    ;; TRASH
    (setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
- 
+
+   (use-package nerd-icons-dired
+     :ensure t
+     :hook
+     (dired-mode . nerd-icons-dired-mode))
+
 #+end_src
 
 
