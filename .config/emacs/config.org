@@ -20,6 +20,8 @@
   - [[#org-mode][ORG MODE]]
   - [[#flycheck][FLYCHECK]]
   - [[#magit][MAGIT]]
+  - [[#eradio][ERADIO]]
+  - [[#emms][EMMS]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#vterm][VTERM]]
 - [[#keybindings][KEYBINDINGS]]
@@ -348,6 +350,34 @@ Install python-pylint for flycheck to work with python files.
 
 #+end_src
 
+** ERADIO
+
+#+begin_src emacs-lisp
+  (use-package eradio
+    :ensure t
+    :init
+    (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
+    :config
+    (setq eradio-channels '(("P1" . "https://live1.sr.se/p1-aac-320?latency=high/")
+  			  ("P2" . "https://live1.sr.se/p2-aac-320?latency=high/")
+  			  ("P3" . "https://live1.sr.se/p3-aac-320?latency=high/"))))
+
+#+end_src
+
+** EMMS
+
+#+begin_src emacs-lisp
+  (use-package emms
+    :ensure t
+    :config
+    (require 'emms-setup)
+    (require 'emms-player-mplayer)
+    (emms-all)
+    (setq emms-player-list '(emms-player-mpv))
+    (setq emms-source-file-default-directory "/home/styrman/Musik"))
+
+
+#+end_src
 * SHELLS AND TERMINALS
 
 ** VTERM
@@ -376,5 +406,19 @@ Install python-pylint for flycheck to work with python files.
 
   ;; Minibuffer escape
   (global-set-key [escape] 'keyboard-escape-quit)
+
+  ;; Keybindings for ERADIO
+  (global-set-key (kbd "C-c r p") 'eradio-play)
+  (global-set-key (kbd "C-c r s") 'eradio-stop)
+  (global-set-key (kbd "C-c r t") 'eradio-toggle)
+
+  ;; Keybindings for EMMS
+  (global-set-key (kbd "C-c p x") 'emms-stop)
+  (global-set-key (kbd "C-c p s") 'emms-start)
+  (global-set-key (kbd "C-c p d") 'emms-play-directory)
+  (global-set-key (kbd "C-c p e") 'emms)
+  (global-set-key (kbd "C-c p n") 'emms-next)
+  (global-set-key (kbd "C-c p p") 'emms-previous)
+  
 
 #+end_src
