@@ -22,6 +22,7 @@
   - [[#magit][MAGIT]]
   - [[#eradio][ERADIO]]
   - [[#emms][EMMS]]
+  - [[#writeroom-mode][writeroom-mode]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#vterm][VTERM]]
 - [[#keybindings][KEYBINDINGS]]
@@ -128,6 +129,9 @@
   ;; Enable clipboard
   (setq select-enable-primary nil)
   (setq select-enable-clipboard t)
+
+  ;; Anser yes to follow symbolic link
+  (setq vc-follow-symlinks t)
 
 #+end_src
 
@@ -380,6 +384,17 @@ Install python-pylint for flycheck to work with python files.
     (setq emms-player-list '(emms-player-mpv))
     (setq emms-source-file-default-directory "/home/styrman/Musik"))
 
+
+#+end_src
+
+** writeroom-mode
+
+#+begin_src emacs-lisp
+
+  (use-package writeroom-mode 
+  :ensure t
+  :config
+  :bind ("C-c z" . writeroom-mode))
 
 #+end_src
 
