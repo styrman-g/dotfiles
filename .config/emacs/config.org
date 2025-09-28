@@ -125,6 +125,10 @@
   ;; enable witch-key
   (which-key-mode)  ;; To enable witch-key globaly
 
+  ;; Enable clipboard
+  (setq select-enable-primary nil)
+  (setq select-enable-clipboard t)
+
 #+end_src
 
 * SETUP MY THEME
@@ -378,6 +382,7 @@ Install python-pylint for flycheck to work with python files.
 
 
 #+end_src
+
 * SHELLS AND TERMINALS
 
 ** VTERM
