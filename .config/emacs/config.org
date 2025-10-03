@@ -10,6 +10,7 @@
 - [[#some-basic-stuff][SOME BASIC STUFF]]
 - [[#setup-my-theme][SETUP MY THEME]]
 - [[#setup-my-font][SETUP MY FONT]]
+- [[#language-support][LANGUAGE SUPPORT]]
 - [[#setup-some-programs][SETUP SOME PROGRAMS]]
   - [[#setup-a-startscreen][SETUP A STARTSCREEN]]
   - [[#evil-mode][EVIL MODE]]
@@ -173,6 +174,15 @@
   		    :width 'normal)
 
 #+end_src
+
+* LANGUAGE SUPPORT
+
+#+begin_src emacs-lisp
+  (use-package lua-mode
+    :ensure t)
+
+#+end_src
+
 * SETUP SOME PROGRAMS
 ** SETUP A STARTSCREEN
 
