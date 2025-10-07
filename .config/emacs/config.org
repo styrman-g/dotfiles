@@ -26,7 +26,7 @@
   - [[#writeroom-mode][writeroom-mode]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#vterm][VTERM]]
-- [[#keybindings][KEYBINDINGS]]
+- [[#general-keybindings][GENERAL-KEYBINDINGS]]
 
 * SETUP PACKAGE MANAGER
 
@@ -131,6 +131,7 @@
   (setq select-enable-primary nil)
   (setq select-enable-clipboard t)
 
+
   ;; Anser yes to follow symbolic link
   (setq vc-follow-symlinks t)
 
@@ -214,12 +215,11 @@
 
 
 #+begin_src emacs-lisp
-(use-package evil
-:ensure ( :wait t)
-:demand t
-:config
-(evil-mode 1))
-
+  (use-package evil
+  :ensure ( :wait t)
+  :demand t
+  :config
+  (evil-mode 1))
 #+end_src
 
 ** SETUP ICONS
@@ -441,31 +441,84 @@ Install python-pylint for flycheck to work with python files.
 
 
 
-* KEYBINDINGS
+* GENERAL-KEYBINDINGS
 #+begin_src emacs-lisp
+
+  (use-package general
+    :ensure t
+    :config
+    (general-create-definer styrman/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
+
+    (styrman/leader-keys
+     "." '(find-file :wk "Find file") 
+     "TAB TAB" '(comment-line :wk "Comment lines"))
+
+    (styrman/leader-keys
+     "p"  '(:ignore t :which-key "EMMS")
+     "pd" '(emms-play-directory :which-key "Play Directory")
+     "ps" '(emms-start :wk "PLAY EMMS")
+     "px" '(emms-stop :wk "STOP EMMS")
+     "pe" '(emms :wk "EMMS")
+     "pn" '(emms-next :wk "NEXT")
+     "pp" '(emms-previous :wk "PREVIOUS"))
+
+    (styrman/leader-keys
+      "r" '(:ignore t :wk "ERADIO")
+      "rt" '(eradio-toggle :wk "ERADIO TOGGLE")
+      "rp" '(eradio-play :wk "ERADIO PLAY")
+      "rs" '(eradio-stop :wk "ERADIO STOP"))
+
+
+    (styrman/leader-keys
+    "b" '(:ignore t :wk "Bookmarks/Buffers")
+    "b b" '(switch-to-buffer :wk "Switch to buffer")
+    "b d" '(bookmark-delete :wk "Delete bookmark")
+    "b i" '(ibuffer :wk "Ibuffer")
+    "b k" '(kill-current-buffer :wk "Kill current buffer")
+    "b K" '(kill-some-buffers :wk "Kill multiple buffers")
+    "b l" '(list-bookmarks :wk "List bookmarks")
+    "b m" '(bookmark-set :wk "Set bookmark")
+    "b n" '(next-buffer :wk "Next buffer")
+    "b p" '(previous-buffer :wk "Previous buffer")
+    "b r" '(revert-buffer :wk "Reload buffer")
+    "b s" '(basic-save-buffer :wk "Save buffer")
+    "b S" '(save-some-buffers :wk "Save multiple buffers"))
+
+    (styrman/leader-keys
+    "d" '(:ignore t :wk "Dired")
+    "d d" '(dired :wk "Open dired")
+    "d j" '(dired-jump :wk "Dired jump to current"))
+
+    (styrman/leader-keys
+    "w" '(:ignore t :wk "Windows")
+    ;; Window splits
+    "w c" '(evil-window-delete :wk "Close window")
+    "w n" '(evil-window-new :wk "New window")
+    "w s" '(evil-window-split :wk "Horizontal split window")
+    "w v" '(evil-window-vsplit :wk "Vertical split window")
+    ;; Window motions
+    "w h" '(evil-window-left :wk "Window left")
+    "w j" '(evil-window-down :wk "Window down")
+    "w k" '(evil-window-up :wk "Window up")
+    "w l" '(evil-window-right :wk "Window right")
+    "w w" '(evil-window-next :wk "Goto next window"))
+    )
+
   (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c C-t") 'org-cycle))
   ;; Set a keybinding for org-agenda.
   (global-set-key (kbd "C-c a") 'org-agenda)
+
+  ;; Keybinding for copy and paste
+  (global-set-key (kbd "C-c y") 'yank-from-kill-ring)
 
   ;; Set a keybinding for ESHELL
   (global-set-key (kbd "C-c e") 'eshell)
 
   ;; Minibuffer escape
   (global-set-key [escape] 'keyboard-escape-quit)
-
-  ;; Keybindings for ERADIO
-  (global-set-key (kbd "C-c r p") 'eradio-play)
-  (global-set-key (kbd "C-c r s") 'eradio-stop)
-  (global-set-key (kbd "C-c r t") 'eradio-toggle)
-
-  ;; Keybindings for EMMS
-  (global-set-key (kbd "C-c p x") 'emms-stop)
-  (global-set-key (kbd "C-c p s") 'emms-start)
-  (global-set-key (kbd "C-c p d") 'emms-play-directory)
-  (global-set-key (kbd "C-c p e") 'emms)
-  (global-set-key (kbd "C-c p n") 'emms-next)
-  (global-set-key (kbd "C-c p p") 'emms-previous)
-  
 
 #+end_src
