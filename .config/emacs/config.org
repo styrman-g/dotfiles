@@ -454,7 +454,10 @@ Install python-pylint for flycheck to work with python files.
 
     (styrman/leader-keys
      "." '(find-file :wk "Find file") 
-     "TAB TAB" '(comment-line :wk "Comment lines"))
+     "TAB TAB" '(comment-line :wk "Comment lines")
+     "z" '(writeroom-mode :wk "Writeroom Mode")
+     "e" '(eshell :wk "Eshell")
+     "v" '(vterm :wk "vterm"))
 
     (styrman/leader-keys
      "p"  '(:ignore t :which-key "EMMS")
@@ -488,6 +491,13 @@ Install python-pylint for flycheck to work with python files.
     "b S" '(save-some-buffers :wk "Save multiple buffers"))
 
     (styrman/leader-keys
+      "n" '(:ignore t :wk "org-roam")
+      "nt" '(org-roam-buffer-toggle t :wk "org-roam-buffer-toggle")
+      "nf" '(org-roam-node-find t :wk "org-roam-node-find")
+      "ni" '(org-roam-node-insert t :wk "org-roam-node-insert"))
+
+
+    (styrman/leader-keys
     "d" '(:ignore t :wk "Dired")
     "d d" '(dired :wk "Open dired")
     "d j" '(dired-jump :wk "Dired jump to current"))
@@ -507,8 +517,6 @@ Install python-pylint for flycheck to work with python files.
     "w w" '(evil-window-next :wk "Goto next window"))
     )
 
-  (with-eval-after-load 'org
-  (define-key org-mode-map (kbd "C-c C-t") 'org-cycle))
   ;; Set a keybinding for org-agenda.
   (global-set-key (kbd "C-c a") 'org-agenda)
 
