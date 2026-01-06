@@ -425,26 +425,10 @@ Install python-pylint for flycheck to work with python files.
 
 #+end_src
 
-* SHELLS AND TERMINALS
-
-** VTERM
-
-#+begin_src emacs-lisp
-  (use-package vterm
-  :ensure ( :mait t)
-  :demand t
-  :bind ("C-x v" . vterm)
-  :config
-  (setq shell-file-name "/bin/sh"
-        vterm-max-scrollback 5000))
-#+end_src
-
-
-
 * GENERAL-KEYBINDINGS
 #+begin_src emacs-lisp
 
-  (use-package general
+ (use-package general
     :ensure t
     :config
     (general-create-definer styrman/leader-keys
@@ -516,17 +500,9 @@ Install python-pylint for flycheck to work with python files.
     "w l" '(evil-window-right :wk "Window right")
     "w w" '(evil-window-next :wk "Goto next window"))
     )
-
-  ;; Set a keybinding for org-agenda.
-  (global-set-key (kbd "C-c a") 'org-agenda)
-
-  ;; Keybinding for copy and paste
-  (global-set-key (kbd "C-c y") 'yank-from-kill-ring)
-
-  ;; Set a keybinding for ESHELL
-  (global-set-key (kbd "C-c e") 'eshell)
-
-  ;; Minibuffer escape
+    
+      ;; Minibuffer escape
   (global-set-key [escape] 'keyboard-escape-quit)
 
 #+end_src
+
