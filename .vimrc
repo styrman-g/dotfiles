@@ -83,7 +83,7 @@ set scrolloff=8
 set hlsearch
 set nocompatible
 filetype plugin on
-
+#
 syntax on
 
 " Status bar
