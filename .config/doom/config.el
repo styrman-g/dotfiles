@@ -24,7 +24,7 @@
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 (setq doom-font (font-spec :family "JetBrains Mono" :size 16))
-;;
+
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -41,7 +41,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Dokument/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -75,3 +75,9 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(map! :leader
+      :desc "Comment line" "-" #'comment-line)
+
+
+;; DOOM SETTINGS
+(setq confirm-kill-emacs nil)        ;; Don't confirm on exit

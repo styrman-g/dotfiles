@@ -53,7 +53,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 
 # Shell integrations
-eval "$(fzf --zsh)"
+#eval "$(fzf --zsh)"
 
 # History in cache directory:
 HISTSIZE=10000
