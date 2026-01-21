@@ -81,3 +81,8 @@
 
 ;; DOOM SETTINGS
 (setq confirm-kill-emacs nil)        ;; Don't confirm on exit
+
+;; ORG-ROAM
+(setq org-roam-directory "~/Dokument/wiki")
+
+(setq fancy-splash-image (concat doom-private-dir "splash.png"))
