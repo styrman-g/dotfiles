@@ -85,4 +85,5 @@
 ;; ORG-ROAM
 (setq org-roam-directory "~/Dokument/wiki")
 
+;; Set another startscreen image
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
