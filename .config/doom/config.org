@@ -1,13 +1,23 @@
 #+title: Config
 
+* Table of contents :toc:
+- [[#doom-settings][Doom settings]]
+- [[#org-settings][Org settings]]
+- [[#other-stuff][Other Stuff]]
+
 * Doom settings
 #+begin_src emacs-lisp
+
+;; Set my font
 (setq doom-font (font-spec :family "JetBrains Mono" :size 16))
 
+;; Set my theme
 (setq doom-theme 'doom-nord)
 
+;; Dont want to conferm to kill emacs
 (setq confirm-kill-emacs nil)        ;; Don't confirm on exit
 
+;; Linenumbers
 (setq display-line-numbers-type t)
 #+end_src
 
@@ -25,11 +35,6 @@
 '(org-level-2 :inherit outline-2 :height 1.5)
 '(org-level-1 :inherit outline-1 :height 1.6)
 '(org-document-title  :height 1.8 :bold t :underline nil))
-;; ORG-ROAM
-(setq org-roam-directory "~/Dokument/wiki")
-
-(map! :leader
-      :desc "Comment line" "-" #'comment-line)
 #+end_src
 
 * Other Stuff
@@ -37,5 +42,9 @@
 #+begin_src emacs-lisp
 ;; Set another startscreen image
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
+
+;; Keybinding to comment a line in emacs-lisp
+(map! :leader
+      :desc "Comment line" "-" #'comment-line)
 
 #+end_src
