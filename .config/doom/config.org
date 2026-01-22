@@ -1,3 +1,7 @@
+#+title: Config
+
+* Doom settings
+#+begin_src emacs-lisp
 (setq doom-font (font-spec :family "JetBrains Mono" :size 16))
 
 (setq doom-theme 'doom-nord)
@@ -5,7 +9,10 @@
 (setq confirm-kill-emacs nil)        ;; Don't confirm on exit
 
 (setq display-line-numbers-type t)
+#+end_src
 
+* Org settings
+#+begin_src emacs-lisp
 (setq org-directory "~/Dokument/org/")
 (custom-theme-set-faces!
 'doom-nord
@@ -23,6 +30,12 @@
 
 (map! :leader
       :desc "Comment line" "-" #'comment-line)
+#+end_src
 
+* Other Stuff
+
+#+begin_src emacs-lisp
 ;; Set another startscreen image
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
+
+#+end_src
