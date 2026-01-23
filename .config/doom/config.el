@@ -29,3 +29,11 @@
 ;; Keybinding to comment a line in emacs-lisp
 (map! :leader
       :desc "Comment line" "-" #'comment-line)
+
+;; ESHELL
+(map! :leader
+      :desc "Eshell" "e" #'eshell)
+
+;; List Bookmarks
+(map! :leader
+      :desc "List Bookmarks" "bo" #'list-bookmarks)

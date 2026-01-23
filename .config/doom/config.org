@@ -4,6 +4,7 @@
 - [[#doom-settings][Doom settings]]
 - [[#org-settings][Org settings]]
 - [[#other-stuff][Other Stuff]]
+- [[#keyboard-shorcuts][Keyboard Shorcuts]]
 
 * Doom settings
 #+begin_src emacs-lisp
@@ -46,5 +47,18 @@
 ;; Keybinding to comment a line in emacs-lisp
 (map! :leader
       :desc "Comment line" "-" #'comment-line)
+
+#+end_src
+
+* Keyboard Shorcuts
+#+begin_src emacs-lisp
+
+;; ESHELL
+(map! :leader
+      :desc "Eshell" "e" #'eshell)
+
+;; List Bookmarks
+(map! :leader
+      :desc "List Bookmarks" "bo" #'list-bookmarks)
 
 #+end_src
