@@ -118,4 +118,4 @@ alias install='sudo pacman -S'
 # To install Starchip run: curl -sS https://starship.rs/install.sh | sh
 eval "$(starship init zsh)"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
