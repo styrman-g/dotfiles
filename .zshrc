@@ -35,7 +35,7 @@ autoload -U compinit && compinit
 
 
 ### EXPORTS
-export EDITOR="nvim"
+export EDITOR="emacs"
 export TERM="xterm-256color"                      # getting proper colors
 export BROWSER="brave"
 
@@ -50,10 +50,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-
-
-# Shell integrations
-#eval "$(fzf --zsh)"
 
 # History in cache directory:
 HISTSIZE=10000
@@ -122,3 +118,4 @@ alias install='sudo pacman -S'
 # To install Starchip run: curl -sS https://starship.rs/install.sh | sh
 eval "$(starship init zsh)"
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -135,3 +135,5 @@ function y() {
 # To install Starchip run: curl -sS https://starship.rs/install.sh | sh
 eval "$(starship init bash)"
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
