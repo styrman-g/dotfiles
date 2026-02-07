@@ -11,6 +11,9 @@
 # Pro-tip: While using Sway, you can trigger this configuration to be re-read by   #
 # pressing Super + Shift + C.                                                      #
 #==================================================================================#
+# AUTOSTART PROGRAMS
+exec nm-applet
+
 
 
 #========================#
@@ -36,7 +39,7 @@ gaps inner 8
 gaps outer 5
 
 # Configure the default border:
-default_border pixel 8
+default_border pixel 6
 
 # Set the Wallpaper:
 output * bg $HOME/.config/sway/0277.jpg fill
@@ -69,7 +72,10 @@ set $alt Mod1
 bindsym $mod+Shift+c reload
 
 # Shutdown computer
-bindsym $mod+Shift+p exec poweroff
+bindsym $mod+Shift+p exec wlogout
+
+# Logout
+#bindsym $mod+Shift+e exit
 
 
 # Quit your current session and return to the log-in manager/tty:
@@ -252,7 +258,7 @@ bindsym $mod+return exec $term
 bindsym $mod+q kill
 
 # Open the application launcher:
-bindsym $mod+space exec rofi -show run
+bindsym $mod+space exec rofi -show drun
 
 #======#
 # Misc #
