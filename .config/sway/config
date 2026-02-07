@@ -34,6 +34,14 @@ client.focused_inactive $title_outline_unfocused $background         $text_color
 client.unfocused        $title_outline_unfocused $title_bg_unfocused $text_color   $title_outline_active
 client.urgent           $color_urgent            $color_urgent       $color_urgent $color_urgent         $color_urgent
 
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'adw-gtk3'
+#    gsettings set $gnome-schema icon-theme 'Your-Icon-Theme'
+#    gsettings set $gnome-schema cursor-theme 'Your-Cursor-Theme'
+#    gsettings set $gnome-schema font-name 'Sans 10'
+}
+
 # Add gaps in between all application windows:
 gaps inner 8
 gaps outer 5
@@ -243,6 +251,9 @@ bindsym XF86MonBrightnessUp exec light -A 10
 #=============================================#
 # Set up wofi to replace dmenu as the launcher of choice:
 #set $menu wofi --show drun  -i | xargs swaymsg exec --
+
+# EMACS
+bindsym $mod+shift+e exec emacsclient -c
 
 # Launch your browser:
 bindsym $mod+shift+b exec firefox
