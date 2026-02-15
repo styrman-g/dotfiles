@@ -1,7 +1,3 @@
-live_config_reload = true
-import = [
-    "~/.config/alacritty/themes/catppuccin-macchiato"
-]
 
 [env]
 TERM = "xterm-256color"
@@ -40,5 +36,11 @@ instance = "Alacritty"
 [window.padding]
 x = 6
 y = 6
+
+[general]
+live_config_reload = true
+import = [
+    "~/.config/alacritty/themes/catppuccin-macchiato"
+]
 
 

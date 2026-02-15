@@ -13,6 +13,8 @@
 #==================================================================================#
 # AUTOSTART PROGRAMS
 exec nm-applet
+exec emacs --daemon
+exec flatpak run com.synology.SynologyDrive start
 
 
 
@@ -34,14 +36,6 @@ client.focused_inactive $title_outline_unfocused $background         $text_color
 client.unfocused        $title_outline_unfocused $title_bg_unfocused $text_color   $title_outline_active
 client.urgent           $color_urgent            $color_urgent       $color_urgent $color_urgent         $color_urgent
 
-set $gnome-schema org.gnome.desktop.interface
-exec_always {
-    gsettings set $gnome-schema gtk-theme 'adw-gtk3'
-#    gsettings set $gnome-schema icon-theme 'Your-Icon-Theme'
-#    gsettings set $gnome-schema cursor-theme 'Your-Cursor-Theme'
-#    gsettings set $gnome-schema font-name 'Sans 10'
-}
-
 # Add gaps in between all application windows:
 gaps inner 8
 gaps outer 5
@@ -50,7 +44,7 @@ gaps outer 5
 default_border pixel 6
 
 # Set the Wallpaper:
-output * bg $HOME/.config/sway/0277.jpg fill
+output * bg $HOME/.config/sway/0163.jpg fill
 
 # Set keyboard layout
 input "type:keyboard" {
