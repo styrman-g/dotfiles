@@ -14,6 +14,7 @@
 # AUTOSTART PROGRAMS
 exec nm-applet
 exec emacs --daemon
+exec foot --server
 exec flatpak run com.synology.SynologyDrive start
 
 
@@ -253,10 +254,10 @@ bindsym $mod+shift+e exec emacsclient -c
 bindsym $mod+shift+b exec firefox
 
 # Open a file manager:
-bindsym ctrl+$mod+f exec cosmic-files
+bindsym ctrl+$mod+f exec thunar
 
 # Open a terminal emulator:
-set $term alacritty
+set $term footclient
 bindsym $mod+return exec $term
 
 # Kill focused window:
