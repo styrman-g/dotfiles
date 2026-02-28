@@ -1,5 +1,6 @@
-# Ansible managed message here
-
+# STYRMANS config file for sway wm.
+# you can find it on:
+# https://github.com/styrman-g/dotfiles.git
 #==================================================================================#
 # Sway Window Manager Configuration File                                           #
 #----------------------------------------------------------------------------------#
@@ -15,6 +16,7 @@
 exec nm-applet
 exec emacs --daemon
 exec foot --server
+exec flatpak run com.protonvpn.www
 exec flatpak run com.synology.SynologyDrive start
 
 

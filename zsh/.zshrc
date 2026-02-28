@@ -113,6 +113,8 @@ alias grep="grep --color=auto"
 alias update='sudo pacman -Syu'
 alias install='sudo pacman -S'
 
+# AI
+alias ai='ollama run gpt-oss:120b-cloud'
 
 # Starchip-A cross-shell prompt
 # To install Starchip run: curl -sS https://starship.rs/install.sh | sh
