@@ -47,7 +47,7 @@ gaps outer 5
 default_border pixel 6
 
 # Set the Wallpaper:
-output * bg $HOME/.config/sway/0163.jpg fill
+output * bg $HOME/.config/sway/wallpapers/01.png fill
 
 # Set keyboard layout
 input "type:keyboard" {
