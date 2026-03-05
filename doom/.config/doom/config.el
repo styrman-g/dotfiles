@@ -10,6 +10,22 @@
 ;; Linenumbers
 (setq display-line-numbers-type t)
 
+(custom-set-faces
+ '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "variable-pitch"))))
+ '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.6))))
+ '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.5))))
+ '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.4))))
+ '(markdown-header-face-4 ((t (:inherit markdown-header-face :height 1.3))))
+ '(markdown-header-face-5 ((t (:inherit markdown-header-face :height 1.2))))
+ '(markdown-header-face-6 ((t (:inherit markdown-header-face :height 1.1)))))
+
+(defun gh/toggle-markdown-view-mode ()
+  "Toggle between `markdown-mode' and `markdown-view-mode'."
+  (interactive)
+  (if (eq major-mode 'markdown-view-mode)
+      (markdown-mode)
+    (markdown-view-mode)))
+
 (setq org-directory "~/Dokument/org/")
 (custom-theme-set-faces!
 'doom-nord
@@ -44,3 +60,9 @@
 ;; List Bookmarks
 (map! :leader
       :desc "List Bookmarks" "bo" #'list-bookmarks)
+
+;; Toggle markdown-view
+(map! :leader
+      (:prefix ("t" . "toggle")
+       :desc "Toggle line numbers"            "l" #'doom/toggle-line-numbers
+       :desc "Toggle markdown-view-mode"      "m" #'gh/toggle-markdown-view-mode))
