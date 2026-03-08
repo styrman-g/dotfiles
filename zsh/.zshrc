@@ -116,6 +116,9 @@ alias install='sudo pacman -S'
 # AI
 alias ai='ollama run gpt-oss:120b-cloud'
 
+# Signal-cli
+alias signal-cli='flatpak run org.asamk.SignalCli'
+
 # Starchip-A cross-shell prompt
 # To install Starchip run: curl -sS https://starship.rs/install.sh | sh
 eval "$(starship init zsh)"
