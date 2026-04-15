@@ -53,6 +53,10 @@
   :config
   (setq pdf-view-midnight-colors '("#ABB2BF" . "#282C35")))
 
+;; Making deleted files go to trash can
+(setq delete-by-moving-to-trash t
+	trash-directory "~/.local/share/Trash/files/")
+
 ;; ESHELL
 (map! :leader
       :desc "Eshell" "e" #'eshell)
@@ -66,3 +70,23 @@
       (:prefix ("t" . "toggle")
        :desc "Toggle line numbers"            "l" #'doom/toggle-line-numbers
        :desc "Toggle markdown-view-mode"      "m" #'gh/toggle-markdown-view-mode))
+;; Picture preview
+(map! :leader
+	(:prefix ("d" . "dired")
+	:desc "Open dired" "d" #'dired
+	:desc "Dired jump to current" "j" #'dired-jump)
+	(:after dired
+	(:map dired-mode-map
+	:desc "Peep-dired image previews" "d p" #'peep-dired
+	:desc "Dired view file" "d v" #'dired-view-file)))
+
+(after! ement
+  ;; leader prefix description (which-key)
+  (map! :leader
+        :prefix "z"
+        :desc "Ement: start" "s" #'ement-connect
+        :desc "Ement: List-rooms"  "l" #'ement-list-rooms
+        :desc "Ement: Create-room" "c" #'ement-create-room
+        :desc "Ement: Join-room" "j" #'ement-join-room
+        :desc "Ement: Leave"  "C" #'ement-leave-room
+        :desc "Ement: members" "m" #'ement-list-members))

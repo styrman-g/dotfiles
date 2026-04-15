@@ -54,3 +54,5 @@
 ;; (unpin! t)
 
 (package! tldr)
+(package! peep-dired)
+(package! ement)
