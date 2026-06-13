@@ -42,6 +42,8 @@ keys = [
     Key([mod], "e", lazy.spawn(myEmacs), desc="Running emacs client"),
     # My browser
     Key([mod], "b", lazy.spawn(myBrowser), desc="Running my Browser"),
+    # Shutdown Qtile
+    Key([mod], "p", lazy.spawn("wlogout"), desc="A logout menu"),
 
 
 
@@ -227,12 +229,6 @@ screens = [
                  ),
 
                 widget.Systray(),
-                widget.QuickExit(
-                    foreground = colors[7],
-                    padding = 8,
-                    default_text = '[()]',
-                    countdown_format='[{}]',
-                ),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
