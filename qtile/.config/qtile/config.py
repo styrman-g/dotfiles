@@ -233,7 +233,15 @@ screens = [
                     #format = "%I:%M %p",
                  ),
 
-                widget.Systray(),
+                widget.Systray(
+                    padding = 8,
+                ),
+                widget.BatteryIcon(
+                    foreground = colors[7],
+                    padding = 5,
+                    scale = 1,
+                ),
+
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
