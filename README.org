@@ -22,12 +22,16 @@ I use Gnu-stow to manage my dotfiles.
 Clone my dotfiles to your system.
 #+BEGIN_SRC bash
 git clone https://github.com/styrman-g/dotfiles.git
+#+end_src
 
 # cd into my dotfiles
+#+BEGIN_SRC bash
 cd dotfiles
+#+end_src
 
 # Then use gnu stow to add the program you want to .config
 # Example:
+#+BEGIN_SRC bash
 stow qtile
 
 #+end_src
