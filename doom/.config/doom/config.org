@@ -67,6 +67,12 @@ A custom function to toggle between standard ‘markdown-mode’ and ‘markdown
 '(org-level-2 :inherit outline-2 :height 1.5)
 '(org-level-1 :inherit outline-1 :height 1.6)
 '(org-document-title  :height 1.8 :bold t :underline nil))
+
+;; Org auto tangle src code
+(use-package org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
+
 #+end_src
 
 * Other Stuff

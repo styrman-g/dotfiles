@@ -39,6 +39,11 @@
 '(org-level-1 :inherit outline-1 :height 1.6)
 '(org-document-title  :height 1.8 :bold t :underline nil))
 
+;; Org auto tangle src code
+(use-package org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
+
 ;; Set another startscreen image
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
 

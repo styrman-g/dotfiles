@@ -56,3 +56,4 @@
 (package! tldr)
 (package! peep-dired)
 (package! ement)
+(package! org-auto-tangle)
