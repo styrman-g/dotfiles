@@ -236,11 +236,11 @@ screens = [
                 widget.Systray(
                     padding = 8,
                 ),
-                widget.BatteryIcon(
-                    foreground = colors[7],
-                    padding = 5,
-                    scale = 1,
-                ),
+                #widget.BatteryIcon(
+                #    foreground = colors[7],
+                #    padding = 5,
+                #    scale = 1,
+                #),
 
             ],
             24,
