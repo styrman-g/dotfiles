@@ -127,14 +127,14 @@ layouts = [
     layout.MonadTall(**layout_theme),
     layout.MonadWide(**layout_theme),
     layout.Tile(**layout_theme),
-    layout.Columns(**layout_theme),
     layout.Max(**layout_theme),
+    layout.TreeTab(**layout_theme),
+    #layout.Stack(**layout_theme),
     # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
+    #layout.Columns(**layout_theme),
     # layout.Bsp(),
     # layout.Matrix(),
     # layout.RatioTile(),
-    # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
