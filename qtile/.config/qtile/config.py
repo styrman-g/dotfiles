@@ -224,8 +224,14 @@ screens = [
                     padding = 8,
                     fmt = 'Vol: {}',
                 ),
-                widget.Clock(
+                widget.Wallpaper(
                     foreground = colors[8],
+                    padding = 8,
+                    directory = '/home/styrman//.config/qtile/wallpapers',
+                    label = 'wallpaper',
+                ),
+                widget.Clock(
+                    foreground = colors[7],
                     padding = 8,
                     ## Uncomment for date and time
                     format = "%a, %b %d - %H:%M",
@@ -245,12 +251,13 @@ screens = [
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+              margin=[8, 12, 0, 12],
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
 
         # Set a static wallpaper in Qtile
-        wallpaper='/home/styrman/.config/qtile/wallpapers/01.png',
-        wallpaper_mode='fill',
+        #wallpaper='/home/styrman/.config/qtile/wallpapers/04.jpg',
+        #wallpaper_mode='fill',
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
