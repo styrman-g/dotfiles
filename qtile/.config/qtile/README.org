@@ -160,7 +160,7 @@ for i in groups:
 #+BEGIN_SRC python
 
 # Setting my color theme from colors.py
-colors = colors.DoomOne
+colors = colors.CatppuccinMacchiato
 
 #+end_src
 
@@ -170,7 +170,7 @@ colors = colors.DoomOne
 
 layout_theme = {"border_width": 4,
                 "margin": 12,
-                "border_focus": colors[8],
+                "border_focus": colors[6],
                 "border_normal": colors[0]
                 }
 

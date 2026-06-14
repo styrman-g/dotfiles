@@ -114,11 +114,11 @@ for i in groups:
     )
 
 # Setting my color theme from colors.py
-colors = colors.DoomOne
+colors = colors.CatppuccinMacchiato
 
 layout_theme = {"border_width": 4,
                 "margin": 12,
-                "border_focus": colors[8],
+                "border_focus": colors[6],
                 "border_normal": colors[0]
                 }
 

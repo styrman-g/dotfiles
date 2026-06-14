@@ -51,3 +51,16 @@ Nord = [
     ["#88C0D0", "#88C0D0"], # color[8]
     ["#7d7d7d", "#7d7d7d"]  # color[9]
     ]
+
+CatppuccinMacchiato = [
+    ["#24273a", "#24273a"], # color[0] #
+    ["#cad3f5", "#cad3f5"], # color[1] #
+    ["#3B4252", "#3B4252"], # color[2]
+    ["#BF616A", "#BF616A"], # color[3]
+    ["#a6da95", "#a6da95"], # color[4] #
+    ["#EBCB8B", "#EBCB8B"], # color[5]
+    ["#8aadf4", "#8aadf4"], # color[6] #
+    ["#c6a0f6", "#c6a0f6"], # color[7] #
+    ["#f5a97f", "#f5a97f"], # color[8] #
+    ["#b7bdf8", "#b7bdf8"]  # color[9] #
+    ]
