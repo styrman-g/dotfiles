@@ -14,6 +14,7 @@
 - [[#screens-and-widgets][Screens and Widgets]]
 - [[#setting-wallpaper][Setting Wallpaper]]
 - [[#the-rest][The rest]]
+- [[#autostart-programs][Autostart programs]]
 
 * Imports
 These are python modules that must be imported for this config to work.
@@ -374,7 +375,12 @@ wl_input_rules = None
 # xcursor theme (string or None) and size (integer) for Wayland backend
 wl_xcursor_theme = None
 wl_xcursor_size = 24
+#+end_src
 
+
+* Autostart programs
+
+#+BEGIN_SRC python
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser("/home/styrman/.config/qtile/autostart.sh")
