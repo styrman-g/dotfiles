@@ -57,3 +57,4 @@
 (package! peep-dired)
 (package! ement)
 (package! org-auto-tangle)
+(package! catppuccin-theme)

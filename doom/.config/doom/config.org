@@ -16,7 +16,11 @@
 (setq doom-font (font-spec :family "JetBrains Mono" :size 16))
 
 ;; Set my theme
-(setq doom-theme 'doom-nord)
+;; Set theme with doom
+;; (setq doom-theme 'doom-one)
+(setq doom-theme 'catppuccin)
+
+
 
 ;; Dont want to conferm to kill emacs
 (setq confirm-kill-emacs nil)        ;; Don't confirm on exit
