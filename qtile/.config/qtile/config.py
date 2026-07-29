@@ -129,6 +129,7 @@ layouts = [
     layout.Tile(**layout_theme),
     layout.Max(**layout_theme),
     layout.TreeTab(**layout_theme),
+    layout.Floating(**layout_theme),
     #layout.Stack(**layout_theme),
     # Try more layouts by unleashing below layouts.
     #layout.Columns(**layout_theme),
