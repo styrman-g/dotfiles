@@ -124,3 +124,7 @@ alias signal-cli='flatpak run org.asamk.SignalCli'
 eval "$(starship init zsh)"
 
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/styrman/.local/bin:$PATH"

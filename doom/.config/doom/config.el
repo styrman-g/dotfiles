@@ -14,6 +14,9 @@
 ;; Linenumbers
 (setq display-line-numbers-type t)
 
+;; Transparent Emacs
+;; (add-to-list 'default-frame-alist '(alpha-background . 96))
+
 (custom-set-faces
  '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "variable-pitch"))))
  '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.6))))
@@ -79,6 +82,10 @@
       (:prefix ("t" . "toggle")
        :desc "Toggle line numbers"            "l" #'doom/toggle-line-numbers
        :desc "Toggle markdown-view-mode"      "m" #'gh/toggle-markdown-view-mode))
+
+(map! :leader
+      "t t" #'neotree-toggle)
+
 ;; Picture preview
 (map! :leader
 	(:prefix ("d" . "dired")
