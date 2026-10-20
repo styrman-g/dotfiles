@@ -6,6 +6,7 @@
   - [[#headers][Headers]]
   - [[#toggle-markdown-view][Toggle Markdown View]]
 - [[#org-settings][Org settings]]
+- [[#elfeed][Elfeed]]
 - [[#other-stuff][Other Stuff]]
 - [[#keyboard-shorcuts][Keyboard Shorcuts]]
 
@@ -80,6 +81,17 @@ A custom function to toggle between standard ‘markdown-mode’ and ‘markdown
 (use-package org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
+
+#+end_src
+
+* Elfeed
+#+begin_src emacs-lisp
+;;(require 'elfeed-goodies)
+;;(elfeed-goodies/setup)
+;;(setq elfeed-goodies/entry-pane-size 0.5)
+;;(after! elfeed
+;;  (setq elfeed-feeds
+;;      '("https://www.svt.se/rss.xml" Nyheter))
 
 #+end_src
 

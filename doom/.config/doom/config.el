@@ -51,6 +51,13 @@
   :defer t
   :hook (org-mode . org-auto-tangle-mode))
 
+;;(require 'elfeed-goodies)
+;;(elfeed-goodies/setup)
+;;(setq elfeed-goodies/entry-pane-size 0.5)
+;;(after! elfeed
+;;  (setq elfeed-feeds
+;;      '("https://www.svt.se/rss.xml" Nyheter))
+
 ;; Set another startscreen image
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
 

@@ -137,3 +137,8 @@ eval "$(starship init bash)"
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/styrman/.local/bin:$PATH"
+export PATH="/home/styrman/.local/bin:$PATH"

@@ -58,3 +58,4 @@
 (package! ement)
 (package! org-auto-tangle)
 (package! catppuccin-theme)
+(package! elfeed-goodies)
